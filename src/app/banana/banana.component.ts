@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select} from '@ngrx/store';
+import { Observable} from 'rxjs';
+import {AppState, getMyBanana } from '../app.state';
+import { GetNewBanana } from './banana/state';
 
 @Component({
     selector: 'app-banana',
@@ -8,17 +12,17 @@ import { Component, OnInit } from '@angular/core';
 export class BananaComponent implements OnInit {
 
     title = 'My NgRx Banana App';
+    banana$: Observable<any>;
 
-    constructor() {
-
-    }
+    constructor(private store: Store<AppState>) {}
 
     ngOnInit() {
-
+      this.newBanana();
+      this.banana$ = this.store.pipe(select(getMyBanana));
     }
 
     newBanana() {
-
+      this.store.dispatch(new GetNewBanana(null));
     }
 
     peelBanana() {
