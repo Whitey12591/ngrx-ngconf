@@ -4,4 +4,4 @@ export interface State {
   color: string;
 }
 
-export const inititalState: State = {} as State
+export const initialState: State = {} as State
